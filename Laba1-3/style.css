@@ -1,0 +1,28 @@
+body {
+	background-color: #4B0082;
+	font-family: cursive;
+	color: #ffffff;
+}
+img {
+	height: 250px;
+	width: 250px;
+}
+.star {
+	text-align: center;
+	margin: auto;
+	font-size: 25px;
+}
+h2 {
+	text-shadow: #9370DB 1px 0 10px;
+}
+.input-margin {
+	margin-left: 2px;
+}
+a {
+    color: #000000;
+    text-shadow: #00FFFF 1px 0 5px;
+}
+
+a:hover {
+    color: #B0E0E6;
+}
