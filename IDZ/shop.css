@@ -1,0 +1,225 @@
+/* Общие стили */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    padding-top: 80px;
+}
+
+/* Навигация */
+.navbar {
+    background-color: #00000080;
+    height: 80px;
+    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0 20px;
+    font-size: 18px;
+    transition: text-shadow 0.2s ease;
+}
+.navbar a:hover {
+    color: #00BFFF;
+    text-shadow: 0px 0px 10px #00BFFF;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+.navbar a:first-child {
+    margin-left: 20px;
+}
+.navbar a:last-child {
+    margin-right: 80px;
+}
+
+/* Hero section (раздел слайдера) */
+.hero-section {
+    height: 90vh;
+    background-image: url('images/artwork.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.hero-section .title {
+    font-size: 58px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 0px 0px 20px rgba(181, 81, 208, 0.6);
+}
+.carousel-container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin: 0 auto;
+}
+.carousel {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 20px rgba(181, 81, 208, 0.6);
+    overflow: hidden;
+    backdrop-filter: blur(50px);
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    visibility: hidden;
+}
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in-out, visibility 0s;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 48px;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 50%;
+}
+.arrow.left {
+    left: -100px;
+}
+.arrow.right {
+    right: -100px;
+}
+
+/* Разделы с карточками */
+.tab-content h2 {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 80px;
+}
+/* Сетка для карточек товаров */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет переносить карточки на следующую строку */
+    justify-content: space-between; /* Равномерное распределение карточек по ширине */
+    gap: 40px; /* Отступы между карточками */
+    margin: 0 auto;
+    max-width: 1200px; /* Задаём максимальную ширину сетки */
+}
+.product-card {
+    flex: 0 0 calc(30.8% - 40px); /* 3 карточки в ряду, с учётом отступов */
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0px 0px 30px rgba(181, 81, 208, 0.6);
+    position: relative; /* Для позиционирования кнопки внизу */
+    height: 450px;
+}
+.product-card:hover {
+    transform: scale(1.03);
+}
+.product-card img {
+    width: 100%;
+    height: 60%;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.product-card .name {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+.product-card .price {
+    color: limegreen;
+    font-size: 24px;
+    margin: 10px 0;
+}
+.product-card .buy-btn {
+    padding: 10px 20px;
+    background-color: limegreen;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.product-card .buy-btn:hover {
+    background-color: #B551D0;
+}
+
+/* Дополнительные стили */
+.tab-content {
+    padding-bottom: 100px;
+}
+
+/* Стили для корзины */
+.cart-section {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    border: 1px solid white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+.cart-section h2 {
+    margin-bottom: 20px;
+}
+#cart-items {
+    margin-bottom: 20px;
+}
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.cart-item span {
+    margin-right: 10px;
+}
+.cart-total {
+    font-size: 18px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cart-remove {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cart-remove:hover {
+    background-color: darkred;
+}

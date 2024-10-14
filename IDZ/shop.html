@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC STORE</title>
+    <link rel="stylesheet" href="shop.css">
+    <script src="database.js" defer></script> <!-- Подключение базы данных товаров -->
+    <script src="shop.js" defer></script> <!-- Подключение основного JS -->
+</head>
+<body>
+
+    <!-- Навигация -->
+    <div class="navbar">
+        <a href="#videocards">Відеокарти</a>
+        <a href="#processors">Процесори</a>
+        <a href="#psu">Блоки живлення</a>
+        <span class="logo">PC STORE</span>
+        <a href="#ram">Оперативна пам'ять</a>
+        <a href="#cases">Корпуси</a>
+        <a href="#memory">Пам'ять</a>
+    </div>
+
+    <!-- Секция слайдера -->
+    <div class="hero-section">
+        <div class="title">НАЙКРАЩЕ</div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="images/rtx4090.png" alt="Slide 1" class="slide active">
+                <img src="images/rtx4090.png" alt="Slide 2" class="slide">
+                <img src="images/rtx4090.png" alt="Slide 3" class="slide">
+            </div>
+            <span class="arrow left">&lt;</span>
+            <span class="arrow right">&gt;</span>
+        </div>
+    </div>
+
+    <div id="tabs">
+        <!-- Видеокарты -->
+        <div id="videocards" class="tab-content">
+            <h2>Відеокарти</h2>
+            <div class="product-grid" data-category="videocards">
+                <!-- Карточки товаров для видеокарт будут добавлены через JS -->
+            </div>
+        </div>
+
+        <!-- Процессоры -->
+        <div id="processors" class="tab-content" style="display: none;">
+            <h2>Процесори</h2>
+            <div class="product-grid" data-category="processors">
+                <!-- Карточки товаров для процессоров будут добавлены через JS -->
+            </div>
+        </div>
+
+        <!-- Блоки питания -->
+        <div id="psu" class="tab-content" style="display: none;">
+            <h2>Блоки живлення</h2>
+            <div class="product-grid" data-category="psu">
+                <!-- Карточки товаров для блоков питания будут добавлены через JS -->
+            </div>
+        </div>
+
+        <!-- Добавьте другие категории по необходимости -->
+    </div>
+
+    <!-- Секция корзины -->
+    <div id="cart" class="cart-section">
+        <h2>Кошик</h2>
+        <div id="cart-items">
+            <!-- Товары в корзине будут добавляться через JS -->
+        </div>
+        <div class="cart-total">
+            <strong>Загальна сума:</strong> <span id="cart-total">0</span>$
+        </div>
+    </div>
+
+</body>
+</html>
