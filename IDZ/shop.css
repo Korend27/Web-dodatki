@@ -11,7 +11,6 @@ body {
 .navbar {
     background-color: #00000080;
     height: 80px;
-    padding: 0 40px;
     position: fixed;
     top: 0;
     left: 0;
@@ -54,6 +53,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 1px;
 }
 .hero-section .title {
     font-size: 58px;
@@ -86,13 +86,12 @@ body {
     height: 100%;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 2s ease-in-out;
+    transition: opacity 1s ease-in-out;
     visibility: hidden;
 }
 .slide.active {
     opacity: 1;
     visibility: visible;
-    transition: opacity 1s ease-in-out, visibility 0s;
 }
 .arrow {
     position: absolute;
@@ -101,7 +100,7 @@ body {
     font-size: 48px;
     color: white;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10;
     padding: 10px;
     border-radius: 50%;
 }
@@ -118,24 +117,25 @@ body {
     font-size: 42px;
     margin-bottom: 80px;
 }
+
 /* Сетка для карточек товаров */
 .product-grid {
     display: flex;
-    flex-wrap: wrap; /* Позволяет переносить карточки на следующую строку */
-    justify-content: space-between; /* Равномерное распределение карточек по ширине */
-    gap: 40px; /* Отступы между карточками */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
     margin: 0 auto;
-    max-width: 1200px; /* Задаём максимальную ширину сетки */
+    max-width: 1200px;
 }
 .product-card {
-    flex: 0 0 calc(30.8% - 40px); /* 3 карточки в ряду, с учётом отступов */
+    flex: 0 0 calc(30.9% - 40px); /* Три карточки в ряд */
     border: 1px solid white;
     border-radius: 30px;
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
     box-shadow: 0px 0px 30px rgba(181, 81, 208, 0.6);
-    position: relative; /* Для позиционирования кнопки внизу */
+    position: relative;
     height: 450px;
 }
 .product-card:hover {
@@ -176,6 +176,7 @@ body {
 
 /* Дополнительные стили */
 .tab-content {
+    padding-top: 60px;
     padding-bottom: 100px;
 }
 
@@ -222,4 +223,68 @@ body {
 }
 .cart-remove:hover {
     background-color: darkred;
+}
+
+/* Плавающая кнопка корзины */
+#floating-cart-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFFFFF;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cart-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Секция новостей */
+#news-section {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+#news-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#news-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-item {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.news-item:hover {
+    background-color: #555;
 }
