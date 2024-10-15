@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC STORE</title>
     <link rel="stylesheet" href="shop.css">
-    <script src="database.js" defer></script> <!-- Подключение базы данных товаров -->
-    <script src="shop.js" defer></script> <!-- Подключение основного JS -->
+    <script src="database.js" defer></script>
+    <script src="shop.js" defer></script>
 </head>
 <body>
 
-    <!-- Навигация -->
     <div class="navbar">
         <a href="#videocards" style="padding-left: 40px">Відеокарти</a>
         <a href="#processors">Процесори</a>
@@ -21,7 +20,6 @@
         <a href="#memory">Пам'ять</a>
     </div>
 
-    <!-- Секция слайдера -->
     <div class="hero-section">
         <div class="title">НАЙКРАЩЕ</div>
         <div class="carousel-container">
@@ -70,24 +68,19 @@
         </div>
     </div>
 
-    <!-- Секция корзины -->
     <div id="cart" class="cart-section">
         <h2>Кошик</h2>
-        <div id="cart-items">
-            <!-- Товары в корзине будут добавляться через JS -->
-        </div>
+        <div id="cart-items"></div>
         <div class="cart-total">
             <strong>Загальна сума:</strong> <span id="cart-total">0</span>$
         </div>
     </div>
 
-    <!-- Блок новостей -->
     <div id="news-section">
         <h2>Останні новини NVIDIA</h2>
         <div id="news-feed"></div>
     </div>
 
-    <!-- Плавающая кнопка корзины -->
     <button id="floating-cart-btn">
         🛒 <span id="cart-count"></span>
     </button>
