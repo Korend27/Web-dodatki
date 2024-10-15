@@ -1,4 +1,3 @@
-/* Общие стили */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,7 +6,6 @@ body {
     padding-top: 80px;
 }
 
-/* Навигация */
 .navbar {
     background-color: #00000080;
     height: 80px;
@@ -44,7 +42,6 @@ body {
     margin-right: 80px;
 }
 
-/* Hero section (раздел слайдера) */
 .hero-section {
     height: 90vh;
     background-image: url('images/artwork.png');
@@ -111,14 +108,12 @@ body {
     right: -100px;
 }
 
-/* Разделы с карточками */
 .tab-content h2 {
     text-align: center;
     font-size: 42px;
     margin-bottom: 80px;
 }
 
-/* Сетка для карточек товаров */
 .product-grid {
     display: flex;
     flex-wrap: wrap;
@@ -128,7 +123,7 @@ body {
     max-width: 1200px;
 }
 .product-card {
-    flex: 0 0 calc(30.9% - 40px); /* Три карточки в ряд */
+    flex: 0 0 calc(30.9% - 40px);
     border: 1px solid white;
     border-radius: 30px;
     padding: 20px;
@@ -174,13 +169,11 @@ body {
     background-color: #B551D0;
 }
 
-/* Дополнительные стили */
 .tab-content {
     padding-top: 60px;
     padding-bottom: 100px;
 }
 
-/* Стили для корзины */
 .cart-section {
     margin-top: 50px;
     margin-bottom: 100px;
@@ -225,7 +218,6 @@ body {
     background-color: darkred;
 }
 
-/* Плавающая кнопка корзины */
 #floating-cart-btn {
     position: fixed;
     bottom: 20px;
@@ -260,7 +252,6 @@ body {
     justify-content: center;
 }
 
-/* Секция новостей */
 #news-section {
     padding: 20px;
     background-color: #333;
