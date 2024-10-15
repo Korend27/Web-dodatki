@@ -1,24 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Переключение вкладок
+
     const navbarLinks = document.querySelectorAll('.navbar a');
     const tabContents = document.querySelectorAll('.tab-content');
 
     function showTab(tabId) {
-        // Скрываем все секции
         tabContents.forEach(content => {
             content.style.display = 'none';
         });
-        // Показываем нужную секцию
         document.getElementById(tabId).style.display = 'block';
     }
 
     navbarLinks.forEach(link => {
         link.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем переход по ссылке
-            const targetId = this.getAttribute('href').substring(1); // Извлекаем ID секции
-            showTab(targetId); // Показываем нужную секцию
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            showTab(targetId);
 
-            // Плавная прокрутка к блоку с товарами
             const targetElement = document.getElementById(targetId);
             targetElement.scrollIntoView({
                 behavior: 'smooth'
@@ -26,10 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Показываем по умолчанию видеокарты
     showTab('videocards');
 
-    // Работа с слайдами
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
     let isSliding = false;
@@ -56,18 +51,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.arrow.right').addEventListener('click', nextSlide);
     setInterval(nextSlide, 5000);
 
-    // Генерация товаров из базы данных (products.js)
     const cartItemsContainer = document.getElementById('cart-items');
     const cartTotalContainer = document.getElementById('cart-total');
     const cart = {};
 
-    // Функция для генерации карточек товаров по категориям
     function generateProductCards(products) {
         const grids = document.querySelectorAll('.product-grid');
 
         grids.forEach(grid => {
             const category = grid.getAttribute('data-category');
-            grid.innerHTML = ''; // Очищаем текущие карточки товаров
+            grid.innerHTML = '';
 
             const filteredProducts = products.filter(product => product.category === category);
 
@@ -88,10 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Обработчики для кнопок "Придбати"
         document.querySelectorAll('.buy-btn').forEach(button => {
             button.addEventListener('click', function (event) {
-                event.preventDefault(); // Предотвращаем переход по ссылке
+                event.preventDefault();
                 const productCard = this.closest('.product-card');
                 const productName = productCard.getAttribute('data-product');
                 const productPrice = productCard.getAttribute('data-price');
@@ -100,10 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Генерация карточек товаров из базы данных products.js
     generateProductCards(products);
 
-    // Плавающая кнопка корзины
     const floatingCartBtn = document.getElementById('floating-cart-btn');
     const cartCount = document.getElementById('cart-count');
 
@@ -116,12 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
         cartCount.style.display = count > 0 ? 'flex' : 'none';
     }
 
-    // Функция для обновления корзины
     function updateCart() {
-        cartItemsContainer.innerHTML = ''; // Очищаем контейнер с товарами
+        cartItemsContainer.innerHTML = '';
         let totalSum = 0;
 
-        // Генерируем каждый товар в корзине
         Object.keys(cart).forEach(product => {
             const item = cart[product];
             const itemTotal = item.price * item.quantity;
@@ -144,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCartCount(Object.keys(cart).length);
     }
 
-    // Добавление товара в корзину
     function addToCart(product, price) {
         if (cart[product]) {
             cart[product].quantity += 1;
@@ -154,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCart();
     }
 
-    // Удаление товара из корзины
     function removeFromCart(product) {
         if (cart[product]) {
             delete cart[product];
@@ -168,8 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             removeFromCart(product);
         }
     });
-
-    // Фейковая новостная лента для демонстрации
+    
     const newsFeed = document.getElementById('news-feed');
     const fakeNews = [
         { title: "New GeForce RTX 4090 Available Now!", link: "https://www.nvidia.com/en-eu/geforce/news/" },
