@@ -1,84 +1,60 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Плавная прокрутка до разделов
+    // Переключение вкладок
     const navbarLinks = document.querySelectorAll('.navbar a');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function showTab(tabId) {
+        // Скрываем все секции
+        tabContents.forEach(content => {
+            content.style.display = 'none';
+        });
+        // Показываем нужную секцию
+        document.getElementById(tabId).style.display = 'block';
+    }
 
     navbarLinks.forEach(link => {
         link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1); // Извлечение ID раздела
-            const targetElement = document.getElementById(targetId); // Нахождение элемента по ID
-            
-            // Прокрутка к выбранному разделу с учетом смещения навбара
-            const headerOffset = 80; // Учитываем высоту навбара
-            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - headerOffset;
+            event.preventDefault(); // Предотвращаем переход по ссылке
+            const targetId = this.getAttribute('href').substring(1); // Извлекаем ID секции
+            showTab(targetId); // Показываем нужную секцию
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth' // Плавная прокрутка
+            // Плавная прокрутка к блоку с товарами
+            const targetElement = document.getElementById(targetId);
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
             });
-
-            showTab(targetId); // Переключаем вкладку
         });
     });
+
+    // Показываем по умолчанию видеокарты
+    showTab('videocards');
 
     // Работа с слайдами
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
+    let isSliding = false;
     const totalSlides = slides.length;
-    let slideInterval;
 
-    // Функция для показа слайда с паузой
-    function showSlideWithPause(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active', 'inactive');
-            if (i === index) {
-                setTimeout(() => {
-                    slide.classList.add('active');
-                }, 1000); // Пауза 1000 миллисекунд (1 секунда)
-            } else {
-                slide.classList.add('inactive');
-            }
-        });
+    function showSlide(index) {
+        if (isSliding) return;
+        isSliding = true;
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+        setTimeout(() => isSliding = false, 1000);
     }
 
-    // Автопрокрутка каждые 5 секунд
-    function startAutoSlide() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(function () {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlideWithPause(currentSlide);
-        }, 5000); // Каждые 5 секунд
-    }
-
-    // Обработчики для ручного переключения слайдов
-    document.querySelector('.arrow.left').addEventListener('click', function () {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlideWithPause(currentSlide);
-        startAutoSlide();
-    });
-
-    document.querySelector('.arrow.right').addEventListener('click', function () {
+    function nextSlide() {
         currentSlide = (currentSlide + 1) % totalSlides;
-        showSlideWithPause(currentSlide);
-        startAutoSlide();
-    });
-
-    // Инициализация первого слайда и автопрокрутки
-    showSlideWithPause(currentSlide);
-    startAutoSlide();
-
-    // Переключение вкладок
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    function showTab(tabId) {
-        tabContents.forEach(content => {
-            content.style.display = 'none';
-        });
-        document.getElementById(tabId).style.display = 'block';
+        showSlide(currentSlide);
     }
 
-    showTab('videocards'); // По умолчанию показываем видеокарты
+    document.querySelector('.arrow.left').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    });
+
+    document.querySelector('.arrow.right').addEventListener('click', nextSlide);
+    setInterval(nextSlide, 5000);
 
     // Генерация товаров из базы данных (products.js)
     const cartItemsContainer = document.getElementById('cart-items');
@@ -127,6 +103,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Генерация карточек товаров из базы данных products.js
     generateProductCards(products);
 
+    // Плавающая кнопка корзины
+    const floatingCartBtn = document.getElementById('floating-cart-btn');
+    const cartCount = document.getElementById('cart-count');
+
+    floatingCartBtn.addEventListener('click', () => {
+        document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    function updateCartCount(count) {
+        cartCount.textContent = count;
+        cartCount.style.display = count > 0 ? 'flex' : 'none';
+    }
+
     // Функция для обновления корзины
     function updateCart() {
         cartItemsContainer.innerHTML = ''; // Очищаем контейнер с товарами
@@ -151,16 +140,16 @@ document.addEventListener('DOMContentLoaded', function () {
             cartItemsContainer.appendChild(cartItemElement);
         });
 
-        // Обновляем общую сумму
         cartTotalContainer.textContent = totalSum;
+        updateCartCount(Object.keys(cart).length);
     }
 
     // Добавление товара в корзину
     function addToCart(product, price) {
         if (cart[product]) {
-            cart[product].quantity += 1; // Если товар уже есть в корзине, увеличиваем количество
+            cart[product].quantity += 1;
         } else {
-            cart[product] = { name: product, price: parseFloat(price), quantity: 1 }; // Добавляем новый товар
+            cart[product] = { name: product, price: parseFloat(price), quantity: 1 };
         }
         updateCart();
     }
@@ -168,16 +157,30 @@ document.addEventListener('DOMContentLoaded', function () {
     // Удаление товара из корзины
     function removeFromCart(product) {
         if (cart[product]) {
-            delete cart[product]; // Удаляем товар из корзины
+            delete cart[product];
             updateCart();
         }
     }
 
-    // Обработчик для удаления товара
     cartItemsContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('cart-remove')) {
             const product = event.target.getAttribute('data-product');
             removeFromCart(product);
         }
+    });
+
+    // Фейковая новостная лента для демонстрации
+    const newsFeed = document.getElementById('news-feed');
+    const fakeNews = [
+        { title: "New GeForce RTX 4090 Available Now!", link: "https://www.nvidia.com/en-eu/geforce/news/" },
+        { title: "Driver Update for GeForce Cards", link: "https://www.nvidia.com/en-eu/geforce/news/" },
+        { title: "NVIDIA Announces New AI Technology", link: "https://www.nvidia.com/en-eu/geforce/news/" }
+    ];
+
+    fakeNews.forEach(news => {
+        const newsElement = document.createElement('div');
+        newsElement.classList.add('news-item');
+        newsElement.innerHTML = `<a href="${news.link}" target="_blank">${news.title}</a>`;
+        newsFeed.appendChild(newsElement);
     });
 });
