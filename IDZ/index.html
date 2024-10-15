@@ -12,7 +12,7 @@
 
     <!-- Навигация -->
     <div class="navbar">
-        <a href="#videocards">Відеокарти</a>
+        <a href="#videocards" style="padding-left: 40px">Відеокарти</a>
         <a href="#processors">Процесори</a>
         <a href="#psu">Блоки живлення</a>
         <span class="logo">PC STORE</span>
@@ -27,8 +27,11 @@
         <div class="carousel-container">
             <div class="carousel">
                 <img src="images/rtx4090.png" alt="Slide 1" class="slide active">
-                <img src="images/rtx4090.png" alt="Slide 2" class="slide">
-                <img src="images/rtx4090.png" alt="Slide 3" class="slide">
+                <img src="images/i9_14900kf.png" alt="Slide 2" class="slide">
+                <img src="images/asus_rog_strix_1000g.png" alt="Slide 3" class="slide">
+                <img src="images/kingston_ddr5_64gb_2x32gb_6000mhz.png" alt="Slide 4" class="slide">
+                <img src="images/JONSBO_MOD_3_mini_White.png" alt="Slide 5" class="slide">
+                <img src="images/kingston_fury_renegade_3d_nand_tlc_1tb.png" alt="Slide 6" class="slide">
             </div>
             <span class="arrow left">&lt;</span>
             <span class="arrow right">&gt;</span>
@@ -36,31 +39,35 @@
     </div>
 
     <div id="tabs">
-        <!-- Видеокарты -->
         <div id="videocards" class="tab-content">
             <h2>Відеокарти</h2>
-            <div class="product-grid" data-category="videocards">
-                <!-- Карточки товаров для видеокарт будут добавлены через JS -->
-            </div>
+            <div class="product-grid" data-category="videocards"></div>
         </div>
 
-        <!-- Процессоры -->
         <div id="processors" class="tab-content" style="display: none;">
             <h2>Процесори</h2>
-            <div class="product-grid" data-category="processors">
-                <!-- Карточки товаров для процессоров будут добавлены через JS -->
-            </div>
+            <div class="product-grid" data-category="processors"></div>
         </div>
 
-        <!-- Блоки питания -->
         <div id="psu" class="tab-content" style="display: none;">
             <h2>Блоки живлення</h2>
-            <div class="product-grid" data-category="psu">
-                <!-- Карточки товаров для блоков питания будут добавлены через JS -->
-            </div>
+            <div class="product-grid" data-category="psu"></div>
         </div>
 
-        <!-- Добавьте другие категории по необходимости -->
+        <div id="ram" class="tab-content" style="display: none;">
+            <h2>Оперативна пам'ять</h2>
+            <div class="product-grid" data-category="ram"></div>
+        </div>
+
+        <div id="cases" class="tab-content" style="display: none;">
+            <h2>Корпуси</h2>
+            <div class="product-grid" data-category="cases"></div>
+        </div>
+
+        <div id="memory" class="tab-content" style="display: none;">
+            <h2>Пам'ять</h2>
+            <div class="product-grid" data-category="memory"></div>
+        </div>
     </div>
 
     <!-- Секция корзины -->
@@ -73,6 +80,17 @@
             <strong>Загальна сума:</strong> <span id="cart-total">0</span>$
         </div>
     </div>
+
+    <!-- Блок новостей -->
+    <div id="news-section">
+        <h2>Останні новини NVIDIA</h2>
+        <div id="news-feed"></div>
+    </div>
+
+    <!-- Плавающая кнопка корзины -->
+    <button id="floating-cart-btn">
+        🛒 <span id="cart-count"></span>
+    </button>
 
 </body>
 </html>
